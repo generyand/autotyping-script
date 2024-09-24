@@ -1,9 +1,18 @@
 import pyautogui
 import time
 import random
+import webbrowser
+from typing import List, Callable
 
-# Greatly expanded lists of words
-adjectives = [
+# Constants
+EDGE_PATH = "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+BING_URL = "https://www.bing.com"
+INITIAL_DELAY = 2
+PHRASE_COUNT = 40
+TYPING_DELAY = 6
+
+# Word lists
+ADJECTIVES: List[str] = [
     'Shiny', 'Swift', 'Colorful', 'Majestic', 'Tiny', 'Fierce', 'Graceful', 'Exotic', 'Playful', 'Mysterious',
     'Elegant', 'Vibrant', 'Gentle', 'Energetic', 'Sleek', 'Fluffy', 'Wise', 'Curious', 'Dazzling', 'Serene',
     'Mighty', 'Adorable', 'Clever', 'Radiant', 'Nimble', 'Charming', 'Spirited', 'Tranquil', 'Lively', 'Magnificent',
@@ -14,7 +23,7 @@ adjectives = [
     'Diaphanous', 'Effulgent', 'Fecund', 'Gossamer', 'Halcyon', 'Ineffable', 'Jocund', 'Kindred', 'Lissome', 'Mellifluous'
 ]
 
-creatures = [
+CREATURES: List[str] = [
     # Fish
     'Angelfish', 'Bass', 'Clownfish', 'Dorado', 'Eel', 'Flounder', 'Guppy', 'Halibut', 'Koi', 'Lionfish',
     'Marlin', 'Neon Tetra', 'Octopus', 'Pufferfish', 'Quillfish', 'Rainbowfish', 'Salmon', 'Tuna', 'Unicornfish', 'Viperfish',
@@ -36,7 +45,7 @@ creatures = [
     'Acacia', 'Bamboo', 'Cedar', 'Dogwood', 'Elm', 'Fir', 'Ginkgo', 'Hazel', 'Ironwood', 'Juniper'
 ]
 
-habitats = [
+HABITATS: List[str] = [
     'Reef', 'River', 'Ocean', 'Lake', 'Pond', 'Lagoon', 'Stream', 'Bay', 'Estuary', 'Coral',
     'Forest', 'Jungle', 'Savanna', 'Desert', 'Tundra', 'Mountain', 'Valley', 'Meadow', 'Wetland', 'Grassland',
     'Cave', 'Cliff', 'Island', 'Volcano', 'Glacier', 'Canyon', 'Oasis', 'Plateau', 'Marsh', 'Swamp',
@@ -46,25 +55,38 @@ habitats = [
     'Veld', 'Woodland', 'Xeric', 'Yokul', 'Zanja', 'Atoll', 'Bayou', 'Crag', 'Drumlin', 'Escarpment'
 ]
 
-def generate_phrase():
-    # Randomly choose the number of words (1, 2, or 3)
+def generate_phrase() -> str:
+    """Generate a random phrase with 1-3 words."""
     num_words = random.randint(1, 3)
     
     if num_words == 1:
-        return random.choice(creatures)
+        return random.choice(CREATURES)
     elif num_words == 2:
-        return f"{random.choice(adjectives)} {random.choice(creatures)}"
+        return f"{random.choice(ADJECTIVES)} {random.choice(CREATURES)}"
     else:
-        return f"{random.choice(adjectives)} {random.choice(creatures)} {random.choice(habitats)}"
+        return f"{random.choice(ADJECTIVES)} {random.choice(CREATURES)} {random.choice(HABITATS)}"
 
-# Time delay before the script starts typing (in seconds)
-time.sleep(5)
+def open_edge() -> None:
+    """Open Microsoft Edge browser."""
+    webbrowser.register('edge', None, webbrowser.BackgroundBrowser(EDGE_PATH))
+    webbrowser.get('edge').open(BING_URL)
 
-# Generate and type 40 random phrases
-for _ in range(40):
-    phrase = generate_phrase()
-    pyautogui.press('/')  # Press / to go to the search bar
-    pyautogui.press('backspace')  # Press backspace to erase the /
-    pyautogui.typewrite(phrase)  # Type the generated phrase
-    pyautogui.press('enter')  # Press Enter after typing the phrase
-    time.sleep(6)  # Wait for 6 seconds before typing the next phrase
+def type_phrase(phrase: str) -> None:
+    """Type a phrase into the search bar."""
+    pyautogui.press('/')
+    pyautogui.press('backspace')
+    pyautogui.typewrite(phrase)
+    pyautogui.press('enter')
+
+def main() -> None:
+    """Main function to run the script."""
+    open_edge()
+    time.sleep(INITIAL_DELAY)
+
+    for _ in range(PHRASE_COUNT):
+        phrase = generate_phrase()
+        type_phrase(phrase)
+        time.sleep(TYPING_DELAY)
+
+if __name__ == "__main__":
+    main()
