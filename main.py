@@ -1,7 +1,7 @@
 from src.phrase_generator import PhraseGenerator
 from src.browser_controller import BrowserController
 from src.typing_simulator import TypingSimulator
-from config import INITIAL_DELAY, PHRASE_COUNT, TYPING_DELAY
+from src.config import INITIAL_DELAY, PHRASE_COUNT, TYPING_DELAY
 import time
 
 def main():

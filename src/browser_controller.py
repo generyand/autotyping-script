@@ -1,5 +1,5 @@
 import webbrowser
-from config import EDGE_PATH, BING_URL
+from src.config import EDGE_PATH, BING_URL
 
 class BrowserController:
     def open_edge(self) -> None:
