@@ -2,7 +2,7 @@ import pyautogui
 import time
 
 # List of 100 species of fish
-fish_species = [
+list = [
     'Angelfish', 'Archerfish', 'Arowana', 'Barracuda', 'Bass', 'Betta', 'Bluegill', 'Bonito', 'Bullhead', 'Carp',
     'Catfish', 'Clownfish', 'Cod', 'Corydoras', 'Crappie', 'Damselfish', 'Discus', 'Dorado', 'Dragonfish', 'Drum',
     'Eel', 'Emperor', 'Flatfish', 'Flounder', 'Flying Fish', 'Gars', 'Goby', 'Gourami', 'Grouper', 'Grunt', 'Guppy',
@@ -20,9 +20,9 @@ fish_species = [
 time.sleep(5)
 
 # Type each fish species, press / to go to the search bar, and backspace to erase the /
-for species in fish_species:
+for item in list:
     pyautogui.press('/')  # Press / to go to the search bar
     pyautogui.press('backspace')  # Press backspace to erase the /
-    pyautogui.typewrite(species)  # Type the fish species
+    pyautogui.typewrite(item)  # Type the fish species
     pyautogui.press('enter')  # Press Enter after typing the species
-    time.sleep(2)  # Wait for 2 seconds before typing the next species
+    time.sleep(6)  # Wait for 6 seconds before typing the next species
