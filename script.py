@@ -1,7 +1,7 @@
 import pyautogui
 import time
 
-# List of 100 species of fish
+# List
 list = [
     'Angelfish', 'Archerfish', 'Arowana', 'Barracuda', 'Bass', 'Betta', 'Bluegill', 'Bonito', 'Bullhead', 'Carp',
     'Catfish', 'Clownfish', 'Cod', 'Corydoras', 'Crappie', 'Damselfish', 'Discus', 'Dorado', 'Dragonfish', 'Drum',
