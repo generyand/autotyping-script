@@ -1,5 +1,5 @@
 import random
-from data.word_lists import ADJECTIVES, CREATURES, HABITATS
+from data.word_lists import ADJECTIVES, CREATURES, HABITATS, PREPOSITIONS
 
 class PhraseGenerator:
     def generate_phrase(self) -> str:
@@ -11,4 +11,4 @@ class PhraseGenerator:
         elif num_words == 2:
             return f"{random.choice(ADJECTIVES)} {random.choice(CREATURES)}"
         else:
-            return f"{random.choice(ADJECTIVES)} {random.choice(CREATURES)} {random.choice(HABITATS)}"
+            return f"{random.choice(ADJECTIVES)} {random.choice(CREATURES)} {random.choice(PREPOSITIONS)} {random.choice(HABITATS)}"

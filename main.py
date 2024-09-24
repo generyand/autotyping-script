@@ -14,6 +14,7 @@ def main():
 
     for _ in range(PHRASE_COUNT):
         phrase = phrase_generator.generate_phrase()
+        
         typing_simulator.type_phrase(phrase)
         time.sleep(TYPING_DELAY)
 
